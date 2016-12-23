@@ -1,0 +1,5 @@
+afew (0.0+git2016.02.29.b19a88f-1) unstable; urgency=low
+
+  * Initial release (Closes: #849153)
+
+ -- Free Ekanayaka <freee@debian.org>  Fri, 23 Dec 2016 00:03:25 +0000
