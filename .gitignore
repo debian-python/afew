@@ -1,0 +1,7 @@
+*.py[co]
+/dist
+/build
+bin/
+include/
+lib/
+/afew.egg-info
