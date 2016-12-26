@@ -1,3 +1,9 @@
+afew (0.0+git2016.02.29.b19a88f-2) unstable; urgency=medium
+
+  * Replace 'MIT' with 'Expat' in debian/copyright
+
+ -- Free Ekanayaka <freee@debian.org>  Mon, 26 Dec 2016 14:15:52 +0000
+
 afew (0.0+git2016.02.29.b19a88f-1) unstable; urgency=low
 
   * Initial release (Closes: #849153)
