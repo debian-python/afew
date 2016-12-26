@@ -5,30 +5,30 @@ Source: https://github.com/teythoon/afew
 
 Files: *
 Copyright: (c) Justus Winter <4winter@informatik.uni-hamburg.de>
-License: MIT
+License: Expat
 
 Files: afew/filters/FolderNameFilter.py
 Copyright: (c) dtk <dtk@gmx.de>
-License: MIT
+License: Expat
 
 Files: afew/MailMover.py
 Copyright: (c) dtk <dtk@gmx.de>
-License: MIT
+License: Expat
 
 Files: afew/filters/HeaderMatchingFilter.py
 Copyright: (c) 2012 Justus Winter <4winter@informatik.uni-hamburg.de> &
         (c) 2013 Patrick Gerken <do3cc@patrick-gerken.de>
 	(c) 2013 Patrick Totzke <patricktotzke@gmail.com>
 	(c) 2014 Lars Kellogg-Stedman <lars@redhat.com>
-License: MIT
+License: Expat
 
 Files: afew/tests/*
 Copyright: (c) 2013 Patrick Gerken <do3cc@patrick-gerken.de>
-License: MIT
+License: Expat
 
 Files: debian/*
 Copyright: 2016 Free Ekanayaka <freee@debian.org>
-License: MIT
+License: Expat
 Comment: Debian packaging is licensed under the same terms as upstream
 
 License: MIT
