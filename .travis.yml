@@ -1,23 +1,11 @@
-dist: trusty
-language: python
-python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
-  - "3.6"
+sudo: required
 
-addons:
-  apt:
-    packages:
-     - notmuch
-     - python-notmuch
-     - python3-notmuch
+services:
+  - docker
 
-install:
-  - ln -s /usr/lib/python3/dist-packages/notmuch ${VIRTUAL_ENV}/lib/python*/site-packages
-  - pip install codeclimate-test-reporter
-  - python setup.py install
 script:
-  - coverage run --source=afew setup.py test
-after_success:
-  - codeclimate-test-reporter
+  - wget -O- http://travis.debian.net/script.sh | sh -
+
+branches:
+  except:
+    - /^debian\/\d/
