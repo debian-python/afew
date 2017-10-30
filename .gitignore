@@ -5,3 +5,5 @@ bin/
 include/
 lib/
 /afew.egg-info
+afew/version.py
+/.eggs

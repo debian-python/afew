@@ -17,17 +17,21 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
 
+import os
 from setuptools import setup, find_packages
 from sys import version_info
 
 def get_requires():
-    if version_info >= (3, 0):
-        return ['notmuch', 'chardet']
-    else:
-        return ['notmuch', 'subprocess32', 'chardet']
+    if os.environ.get('TRAVIS') != 'true':
+        yield 'notmuch'
+    yield 'chardet'
+    if version_info < (3, 0):
+        yield 'subprocess32'
 
 setup(
     name='afew',
+    use_scm_version={'write_to': 'afew/version.py'},
+    setup_requires=['setuptools_scm'],
     packages=find_packages(),
     test_suite='afew.tests',
     package_data={
@@ -39,7 +43,6 @@ setup(
         'afew.filter': [
             'Filter = afew.filters.BaseFilter:Filter',
             'ArchiveSentMailsFilter = afew.filters.ArchiveSentMailsFilter:ArchiveSentMailsFilter',
-            'ClassifyingFilter = afew.filters.ClassifyingFilter:ClassifyingFilter',
             'FolderNameFilter = afew.filters.FolderNameFilter:FolderNameFilter',
             'HeaderMatchingFilter = afew.filters.HeaderMatchingFilter:HeaderMatchingFilter',
             'InboxFilter = afew.filters.InboxFilter:InboxFilter',
@@ -49,6 +52,16 @@ setup(
             'SpamFilter = afew.filters.SpamFilter:SpamFilter',
         ],
     },
-    install_requires=get_requires(),
-    provides=['afew']
+    install_requires=list(get_requires()),
+    provides=['afew'],
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Environment :: Console',
+        'Intended Audience :: End Users/Desktop',
+        'Programming Language :: Python',
+        'Topic :: Communications :: Email',
+        'Topic :: Communications :: Email :: Filters',
+        'Topic :: Utilities',
+        'Topic :: Database',
+        ],
 )

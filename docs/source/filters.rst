@@ -6,7 +6,6 @@ The default filter set (if you don't specify anything in the config) is:
 .. code-block:: ini
 
     [SpamFilter]
-    [ClassifyingFilter]
     [KillThreadsFilter]
     [ListMailsFilter]
     [ArchiveSentMailsFilter]
@@ -29,12 +28,6 @@ The settings you can use are:
    Note that only a single tag is supported here.
 
 Email will be considered spam if the header `X-Spam-Flag` is present.
-
-ClassifyingFilter
------------------
-
-This filter will tag messages based on what it has learnt from seeing how you've
-tagged messages in the past.  See :doc:`classification` for more details.
 
 KillThreadsFilter
 -----------------
@@ -116,12 +109,12 @@ Some examples are:
     [HeaderMatchingFilter.2]
     header = List-Id
     pattern = <(?P<list_id>.*)>
-    tags = +lists +{list_id}
+    tags = +lists;+{list_id}
 
     [HeaderMatchingFilter.3]
     header = X-Redmine-Project
     pattern = (?P<project>.*)
-    tags = +redmine +{project}
+    tags = +redmine;+{project}
 
 SpamFilter and ListMailsFilter are implemented using HeaderMatchingFilter, and are
 only slightly more complicated than the above examples.
@@ -129,9 +122,9 @@ only slightly more complicated than the above examples.
 FolderNameFilter
 ----------------
 
-This looks at which folder each email is in and uses that name as a tag for the
-email.  So if you have a procmail or sieve set up that puts emails in folders
-for you, this might be useful.
+For each email, it looks at all folders it is in, and uses the path and filename
+as a tag, for the email.  So if you have a procmail or sieve set up that puts emails
+in folders for you, this might be useful.
 
 * folder_explicit_list = <folder list>
 
@@ -163,6 +156,10 @@ for you, this might be useful.
 
     folder transforms = Junk:spam Drafts:draft Sent:sent
 
+* folder_lowercases = true
+
+  * Use lowercase tags for all folder names
+  
 * maildir_separator = <sep>
 
  * Use <sep> to split your maildir hierarchy into individual tags.
