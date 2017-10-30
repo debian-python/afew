@@ -1,3 +1,12 @@
+afew (1.2.0-1) unstable; urgency=medium
+
+  * New upstream version 1.2.0
+  * Drop 0001-fix-failing-tests.patch
+  * Add debian/watch file
+  * Add build dependency on python3-setuptools-scm
+
+ -- Free Ekanayaka <freee@debian.org>  Mon, 30 Oct 2017 13:36:38 +0000
+
 afew (0.0+git2016.02.29.b19a88f-2) unstable; urgency=medium
 
   * Replace 'MIT' with 'Expat' in debian/copyright
