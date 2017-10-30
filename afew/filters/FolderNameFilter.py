@@ -27,7 +27,7 @@ class FolderNameFilter(Filter):
     message = 'Tags all new messages with their folder'
 
     def __init__(self, database, folder_blacklist='', folder_transforms='',
-            maildir_separator='.', folder_explicit_list=''):
+            maildir_separator='.', folder_explicit_list='', folder_lowercases=''):
         super(FolderNameFilter, self).__init__(database)
 
         self.__filename_pattern = '{mail_root}/(?P<maildirs>.*)/(cur|new)/[^/]+'.format(
@@ -35,13 +35,23 @@ class FolderNameFilter(Filter):
         self.__folder_explicit_list = set(folder_explicit_list.split())
         self.__folder_blacklist = set(folder_blacklist.split())
         self.__folder_transforms = self.__parse_transforms(folder_transforms)
+        self.__folder_lowercases = folder_lowercases != ''
         self.__maildir_separator = maildir_separator
 
 
     def handle_message(self, message):
-        maildirs = re.match(self.__filename_pattern, message.get_filename())
+        # Find all the dirs in the mail directory that this message
+        # belongs to
+        maildirs = [re.match(self.__filename_pattern, filename)
+                    for filename in message.get_filenames()]
+        maildirs = filter(None, maildirs)
         if maildirs:
-            folders = set(maildirs.group('maildirs').split(self.__maildir_separator))
+            # Make the folders relative to mail_root and split them.
+            folder_groups = [maildir.group('maildirs').split(self.__maildir_separator)
+                             for maildir in maildirs]
+            folders = set([folder
+                           for folder_group in folder_groups
+                           for folder in folder_group])
             self.log.debug('found folders {} for message {!r}'.format(
                 folders, message.get_header('subject')))
 
@@ -66,6 +76,11 @@ class FolderNameFilter(Filter):
                 transformations.add(self.__folder_transforms[folder])
             else:
                 transformations.add(folder)
+        if self.__folder_lowercases:
+            rtn = set()
+            for folder in transformations:
+                rtn.add(folder.lower())
+            return rtn
         return transformations
 
 
