@@ -1,5 +1,6 @@
 .gitignore
 .travis.yml
+LICENSE
 NEWS.md
 README.rst
 setup.py
@@ -25,11 +26,14 @@ afew.egg-info/top_level.txt
 afew/defaults/afew.config
 afew/filters/ArchiveSentMailsFilter.py
 afew/filters/BaseFilter.py
+afew/filters/DKIMValidityFilter.py
+afew/filters/DMARCReportInspectionFilter.py
 afew/filters/FolderNameFilter.py
 afew/filters/HeaderMatchingFilter.py
 afew/filters/InboxFilter.py
 afew/filters/KillThreadsFilter.py
 afew/filters/ListMailsFilter.py
+afew/filters/MeFilter.py
 afew/filters/SentMailsFilter.py
 afew/filters/SpamFilter.py
 afew/filters/__init__.py
